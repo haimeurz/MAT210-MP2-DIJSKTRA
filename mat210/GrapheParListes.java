@@ -36,6 +36,13 @@ public class GrapheParListes extends Graphe {
         //
         // Exercice 2
         //
+        this.listes = new ArrayList<>();
+      //  for (int i =0; i < nbSommets;i++){
+     //       listes.add(null);
+       //     for (int j = 0; j < nbSommets; j++) {
+         //       ajouterArc(i, j, ponderationArcsAbsents);
+          //  }
+     //   }
     }
 
 
@@ -47,6 +54,8 @@ public class GrapheParListes extends Graphe {
         //
         // Exercice 2
         //
+        listes.get(initial).add(new Arc(initial,terminal,ponderation));
+
     }
 
 
@@ -74,7 +83,8 @@ public class GrapheParListes extends Graphe {
         //
         // Exercice 2
         //
-        return null;
+
+        return listes.get(initial).get(terminal);
     }
 
 
@@ -86,6 +96,7 @@ public class GrapheParListes extends Graphe {
         //
         // Exercice 2
         //
+
         return 0.0;
     }
 

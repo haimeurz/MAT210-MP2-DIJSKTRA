@@ -6,7 +6,7 @@ package mat210;
  * @author Xavier Provençal
  *
  * Modifications par les étudiant.e.s : 
- *  - TODO inscrivez vos noms ici.
+ *  - HAIMEUR ZAKARIA
  *  - TODO inscrivez vos noms ici.
  *  - TODO inscrivez vos noms ici.
  */

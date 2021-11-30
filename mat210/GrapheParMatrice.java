@@ -6,7 +6,7 @@ package mat210;
  * @author Xavier Provençal
  *
  * Modifications par les étudiant.e.s : 
- *  - TODO inscrivez vos noms ici.
+ *  - HAIMEUR ZAKARIA
  *  - TODO inscrivez vos noms ici.
  *  - TODO inscrivez vos noms ici.
  */
@@ -19,6 +19,7 @@ import java.util.Iterator;
  * Implémentation de graphes représentés par des listes d'adjacences.
  */
 public class GrapheParMatrice extends Graphe {
+
 
     /**
      * Constructeur
@@ -34,29 +35,46 @@ public class GrapheParMatrice extends Graphe {
         // 
         // Exercice 1
         //
+        this.nbSommets = nbSommets;
+        this.ponderationArcsAbsents = ponderationArcsAbsents;
+        this.m = new double[nbSommets][nbSommets];
     }
 
 
     /**
      * {@inheritdoc}
+     * Ajoute un arc au graphe.
+     * @param initial sommet initial de l'arc
+     * @param terminal sommet terminal de l'arc
+     * @param ponderation poids de l'arc.
      */
     @Override
     public void ajouterArc(int initial, int terminal, double ponderation) {
-        // 
+        //
         // Exercice 1
         //
+        //if (ponderation != this.ponderationArcsAbsents){
+            m[initial][terminal] = ponderation;
+
     }
 
 
     /**
-     * {@inheritdoc}
-     */
+    * {@inheritdoc}
+    *
+    * Retourne un itateur sur les arcs dont le sommet spécifié est le sommet
+    * initial.
+    * @param sommet le sommet initial.
+    * @return un itérateur sur les arcs partant du sommet.
+    */
     @Override
     public Iterator<Arc> getArcs(int sommet) {
         // 
         // Exercice 1
         //
-        return null;
+        ArrayList<Graphe.Arc> arcs = new ArrayList<Arc>();
+
+        return arcs.iterator();
     }
 
 
@@ -68,7 +86,12 @@ public class GrapheParMatrice extends Graphe {
         // 
         // Exercice 1
         //
-        return 0.0;
+        if(m[initial][terminal] == 0.0) {
+            return getPonderationArcsAbsents();
+        }
+        else {
+            return m[initial][terminal];
+        }
     }
 
 

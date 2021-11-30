@@ -21,7 +21,7 @@ public class TesterGraphes {
 
     public static void main(String[] args) {
         args = "--graphe Listes".split(" ");
-
+        //args = "--graphe Matrice".split(" ");
         String nomRepresentation = null;
         Graphe.Representation representation = null;
 
