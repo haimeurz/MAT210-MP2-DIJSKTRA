@@ -36,13 +36,12 @@ public class GrapheParListes extends Graphe {
         //
         // Exercice 2
         //
-        this.listes = new ArrayList<>();
-      //  for (int i =0; i < nbSommets;i++){
-     //       listes.add(null);
-       //     for (int j = 0; j < nbSommets; j++) {
-         //       ajouterArc(i, j, ponderationArcsAbsents);
-          //  }
-     //   }
+        super.nbSommets = nbSommets;
+        super.ponderationArcsAbsents = ponderationArcsAbsents;
+        this.listes = new ArrayList<ArrayList<Arc>>(nbSommets);
+        for (int i = 0; i < super.nbSommets ; i++) {
+            this.listes.add(new ArrayList<>());
+        }
     }
 
 
@@ -54,8 +53,7 @@ public class GrapheParListes extends Graphe {
         //
         // Exercice 2
         //
-        listes.get(initial).add(new Arc(initial,terminal,ponderation));
-
+        listes.get(initial).add(new Arc(initial, terminal, ponderation));
     }
 
 
@@ -67,7 +65,7 @@ public class GrapheParListes extends Graphe {
         //
         // Exercice 2
         //
-        return null;
+        return listes.get(sommet).iterator();
     }
 
 
@@ -80,11 +78,17 @@ public class GrapheParListes extends Graphe {
      *         existe, null sinon.
      */
     private Arc trouverArc(int initial, int terminal) {
-        //
+        ArrayList<Arc> tousLesArcs = listes.get(initial);
+        Arc arcTrouve = null;
         // Exercice 2
-        //
+        for(int i = 0; i<tousLesArcs.size(); i++){
+            Arc arcActuel = tousLesArcs.get(i);
 
-        return listes.get(initial).get(terminal);
+            if(arcActuel.terminal == terminal ){
+                arcTrouve = arcActuel;
+            }
+        }
+        return arcTrouve;
     }
 
 
@@ -96,8 +100,14 @@ public class GrapheParListes extends Graphe {
         //
         // Exercice 2
         //
+        Arc arc = trouverArc(initial, terminal);
+        if(arc == null){
+           return getPonderationArcsAbsents();
+        }
+        else {
+            return arc.ponderation;
+        }
 
-        return 0.0;
     }
 
     /**

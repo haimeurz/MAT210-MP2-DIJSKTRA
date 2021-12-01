@@ -23,6 +23,7 @@ import java.util.Collections; // Pour inverser un ArrayList avec Collections.rev
  * Par convention, les sommets d'un graphe à `n` sommets sont identifiez par
  * les entiers de 0 à n-1.
  */
+
 public abstract class Graphe {
 
     //
@@ -146,7 +147,14 @@ public abstract class Graphe {
         //
         // Exercice 3
         //
-        return null; 
+
+        ArrayList<Integer> chemin = new ArrayList<>();
+        int position = destination;
+        while(position != -1 ){
+            chemin.add(0,predecesseur.get(position));
+            position = predecesseur.get(position);
+        }
+        return chemin;
     }
 
 
@@ -167,7 +175,49 @@ public abstract class Graphe {
         // Exercice 4
         //
         //return tableauPredecesseurVersChemin(predecesseur, destination);
-        return null;
+        ArrayList<Integer> S = new ArrayList<Integer>();
+        ArrayList<Double> L = new ArrayList<Double>();
+        ArrayList<Integer> P = new ArrayList<Integer>();
+
+        for (int sommet = 0; sommet < getNbSommets(); sommet++) {
+            L.add(getPonderationArcsAbsents());
+            P.add(-1);
+        }
+
+        L.set(depart, 0.0);
+
+        while(!S.contains(destination)){
+            int u = rechercheSommetSuivant(S, L);
+            S.add(u);
+            Iterator<Arc> voisinsDeU = getArcs(u);
+            while(voisinsDeU.hasNext()){
+                Arc arcVersVoisin = voisinsDeU.next();
+                int voisin = arcVersVoisin.terminal;
+                if(!S.contains(voisin)) {
+                    if (L.get(u) + arcVersVoisin.ponderation < L.get(voisin)) {
+                        P.set(voisin, u);
+                        L.set(voisin, L.get(u) + arcVersVoisin.ponderation);
+                    }
+                }
+            }
+        }
+        System.out.println("\n----P = " +tableauPredecesseurVersChemin(P,destination) );
+        return tableauPredecesseurVersChemin(P,destination);
+    }
+
+    public int rechercheSommetSuivant(ArrayList<Integer> S, ArrayList<Double> L){
+        double min=getPonderationArcsAbsents();
+        int sommetMin=-1;
+        for(int i = 0; i<L.size(); i++){
+            if(!S.contains(i)){
+                if(L.get(i)<min){
+                    min = L.get(i);
+                    sommetMin = i;
+                }
+            }
+        }
+        return sommetMin;
+
     }
 
 

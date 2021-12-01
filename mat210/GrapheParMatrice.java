@@ -35,10 +35,12 @@ public class GrapheParMatrice extends Graphe {
         // 
         // Exercice 1
         //
-        this.nbSommets = nbSommets;
-        this.ponderationArcsAbsents = ponderationArcsAbsents;
+        super.nbSommets = nbSommets;
+        super.ponderationArcsAbsents = ponderationArcsAbsents;
         this.m = new double[nbSommets][nbSommets];
     }
+
+
 
 
     /**
@@ -53,7 +55,6 @@ public class GrapheParMatrice extends Graphe {
         //
         // Exercice 1
         //
-        //if (ponderation != this.ponderationArcsAbsents){
             m[initial][terminal] = ponderation;
 
     }
@@ -72,7 +73,14 @@ public class GrapheParMatrice extends Graphe {
         // 
         // Exercice 1
         //
-        ArrayList<Graphe.Arc> arcs = new ArrayList<Arc>();
+        ArrayList<Graphe.Arc> arcs = new ArrayList<Graphe.Arc>();
+
+        for (int sommetArrive = 0; sommetArrive < getNbSommets() ; sommetArrive++) {
+            double ponderation = this.getPonderation(sommet,sommetArrive);
+            if(ponderation != getPonderationArcsAbsents()){
+                arcs.add(new Arc(sommet, sommetArrive, ponderation));
+            }
+        }
 
         return arcs.iterator();
     }
