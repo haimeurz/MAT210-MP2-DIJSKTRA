@@ -150,7 +150,7 @@ public abstract class Graphe {
 
         ArrayList<Integer> chemin = new ArrayList<>();
         int position = destination;
-        while(position != -1 ){
+        while(predecesseur.get(position) != -1 ){
             chemin.add(0,predecesseur.get(position));
             position = predecesseur.get(position);
         }
