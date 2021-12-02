@@ -7,7 +7,7 @@ package mat210;
  *
  * Modifications par les étudiant.e.s : 
  *  - HAIMEUR ZAKARIA
- *  - TODO inscrivez vos noms ici.
+ *  - Frédérique Légaré
  *  - TODO inscrivez vos noms ici.
  */
 

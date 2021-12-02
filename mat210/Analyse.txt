@@ -1,0 +1,20 @@
+
+Dans le contexte du d´eveloppement d’un jeu tile-based, on vous demande de fournir vos conclusions quant `a
+la repr´esentation du graphe (Listes ou Matrices) et l’algorithme de recherche de chemins `a utiliser.
+
+Commencer par donner,en notation grand-O, la complexit´e asymptotique des trois variantes de l’algorithme
+de Dijkstra que vous avez cod´ees. Pour effectuer cette analyse, tenez compte des points suivants :
+— Voici un extrait de la documentation de la classe ArrayList :
+«The size, isEmpty, get, set, iterator, and listIterator operations run in constant time. The
+add operation runs in amortized constant time [. . .]. All of the other operations run in linear time
+(roughly speaking).»
+Vous pouvez donc considérer que S.add() s’effectue en temps constant, O(1) mais que S.contains()
+est en O(n).
+
+— Voici un extrait de la documentation de la classe TreeSet :
+«This implementation provides guaranteed log(n) time cost for the basic operations (add, remove and
+contains).»
+— Consulter ou modifier une case d’un tableau de bool´eens se fait en temps constant O(1).
+Est-ce que votre analyse est confirm´ee par la pratique ? Tester vos impl´ementations avec diff´erentes tailles
+de cartes et r´edigez vos conclusions.
+

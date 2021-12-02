@@ -202,7 +202,7 @@ public abstract class Graphe {
                 }
             }
         }
-        System.out.println("\n----P = " +tableauPredecesseurVersChemin(P,destination) );
+
         return tableauPredecesseurVersChemin(P,destination);
     }
 
@@ -279,7 +279,7 @@ public abstract class Graphe {
                 }
             }
         }
-        System.out.println("\n----P = " +tableauPredecesseurVersChemin(P,destination) );
+
         return tableauPredecesseurVersChemin(P,destination);
 
     }
@@ -328,7 +328,7 @@ public abstract class Graphe {
                 }
             }
         }
-        System.out.println("\n----P = " +tableauPredecesseurVersChemin(P,destination) );
+
         return tableauPredecesseurVersChemin(P,destination);
     }
 
