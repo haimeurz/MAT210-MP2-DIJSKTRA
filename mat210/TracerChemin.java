@@ -23,7 +23,9 @@ public class TracerChemin {
 
         //args = "--carte ./cartes/3x2.png --algo DijkstraParArrayList --graphe Matrice".split(" ");
         //args = "--carte G:\\Other computers\\My Computer\\AUT2021 ETS\\MAT210\\MAT210-MP2-Dijsktra\\cartes\\40x25.png --algo DijkstraParArrayList --graphe Listes".split(" ");
-        args = "--carte ./cartes/40x25.png --graphe Listes --algo DijkstraParArrayList --depart 3 5 --arrivee 24 39".split(" ");
+        //args = "--carte ./cartes/40x25.png --graphe Listes --algo DijkstraParArrayList --depart 3 5 --arrivee 24 39".split(" ");
+        //args = "--carte ./cartes/40x25.png --graphe Listes --algo DijkstraParTreeSet --depart 3 5 --arrivee 24 39".split(" ");
+        args = "--carte ./cartes/40x25.png --graphe Listes --algo DijkstraParBooleanArray --depart 3 5 --arrivee 24 39".split(" ");
         Carte carte = null;
         String fichierCarte = null;
         String fichierSortie = null;

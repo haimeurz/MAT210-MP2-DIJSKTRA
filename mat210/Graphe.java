@@ -7,8 +7,8 @@ package mat210;
  *
  * Modifications par les étudiant.e.s : 
  *  - HAIMEUR ZAKARIA
- *  - TODO inscrivez vos noms ici.
- *  - TODO inscrivez vos noms ici.
+ *  - LÉGARÉ FRÉDÉRIQUE
+ *
  */
  
 import java.util.Iterator;
@@ -149,6 +149,7 @@ public abstract class Graphe {
         //
 
         ArrayList<Integer> chemin = new ArrayList<>();
+        chemin.add(destination);
         int position = destination;
         while(predecesseur.get(position) != -1 ){
             chemin.add(0,predecesseur.get(position));
@@ -187,7 +188,7 @@ public abstract class Graphe {
         L.set(depart, 0.0);
 
         while(!S.contains(destination)){
-            int u = rechercheSommetSuivant(S, L);
+            int u = rechercheSommetSuivantArray(S, L);
             S.add(u);
             Iterator<Arc> voisinsDeU = getArcs(u);
             while(voisinsDeU.hasNext()){
@@ -205,7 +206,7 @@ public abstract class Graphe {
         return tableauPredecesseurVersChemin(P,destination);
     }
 
-    public int rechercheSommetSuivant(ArrayList<Integer> S, ArrayList<Double> L){
+    public int rechercheSommetSuivantArray(ArrayList<Integer> S, ArrayList<Double> L){
         double min=getPonderationArcsAbsents();
         int sommetMin=-1;
         for(int i = 0; i<L.size(); i++){
@@ -217,7 +218,20 @@ public abstract class Graphe {
             }
         }
         return sommetMin;
+    }
 
+    public int rechercheSommetSuivantBoolean(boolean[] S, ArrayList<Double> L){
+        double min=getPonderationArcsAbsents();
+        int sommetMin=-1;
+        for(int i = 0; i<L.size(); i++){
+            if(S[i] == false){
+                if(L.get(i)<min){
+                    min = L.get(i);
+                    sommetMin = i;
+                }
+            }
+        }
+        return sommetMin;
     }
 
 
@@ -237,7 +251,37 @@ public abstract class Graphe {
         // Exercice 5
         //
         //return tableauPredecesseurVersChemin(predecesseur, destination);
-        return null;
+        TreeSet<Integer> S = new TreeSet<Integer>();
+        ArrayList<Double> L = new ArrayList<Double>();
+        ArrayList<Integer> P = new ArrayList<Integer>();
+
+        for (int sommet = 0; sommet < getNbSommets(); sommet++) {
+            L.add(getPonderationArcsAbsents());
+            P.add(-1);
+        }
+
+        L.set(depart, 0.0);
+
+        while(!S.contains(destination)){
+            //L'implementation de cette fonction avec TreeSet ne changerait que le type d'entree et aucun code de la fonction.
+            // Nous avons donc choisi d'appeler la meme fonction en convertissant le TreeSet en ArrayList
+            int u = rechercheSommetSuivantArray(new ArrayList<>(S), L);
+            S.add(u);
+            Iterator<Arc> voisinsDeU = getArcs(u);
+            while(voisinsDeU.hasNext()){
+                Arc arcVersVoisin = voisinsDeU.next();
+                int voisin = arcVersVoisin.terminal;
+                if(!S.contains(voisin)) {
+                    if (L.get(u) + arcVersVoisin.ponderation < L.get(voisin)) {
+                        P.set(voisin, u);
+                        L.set(voisin, L.get(u) + arcVersVoisin.ponderation);
+                    }
+                }
+            }
+        }
+        System.out.println("\n----P = " +tableauPredecesseurVersChemin(P,destination) );
+        return tableauPredecesseurVersChemin(P,destination);
+
     }
 
 
@@ -256,8 +300,36 @@ public abstract class Graphe {
         // 
         // Exercice 6
         //
-        //return tableauPredecesseurVersChemin(predecesseur, destination);
-        return null;
+        boolean[] S = new boolean[getNbSommets()];
+        ArrayList<Double> L = new ArrayList<Double>();
+        ArrayList<Integer> P = new ArrayList<Integer>();
+
+        for (int sommet = 0; sommet < getNbSommets(); sommet++) {
+            L.add(getPonderationArcsAbsents());
+            P.add(-1);
+        }
+
+        L.set(depart, 0.0);
+
+        while(S[destination] == false){
+            //L'implementation de cette fonction avec TreeSet ne changerait que le type d'entree et aucun code de la fonction.
+            // Nous avons donc choisi d'appeler la meme fonction en convertissant le TreeSet en ArrayList
+            int u = rechercheSommetSuivantBoolean(S, L);
+            S[u] = true;
+            Iterator<Arc> voisinsDeU = getArcs(u);
+            while(voisinsDeU.hasNext()){
+                Arc arcVersVoisin = voisinsDeU.next();
+                int voisin = arcVersVoisin.terminal;
+                if(S[voisin] == false) {
+                    if (L.get(u) + arcVersVoisin.ponderation < L.get(voisin)) {
+                        P.set(voisin, u);
+                        L.set(voisin, L.get(u) + arcVersVoisin.ponderation);
+                    }
+                }
+            }
+        }
+        System.out.println("\n----P = " +tableauPredecesseurVersChemin(P,destination) );
+        return tableauPredecesseurVersChemin(P,destination);
     }
 
     /**
